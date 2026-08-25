@@ -1,0 +1,55 @@
+{
+	"name": "@velastack/kit",
+	"version": "0.1.0",
+	"description": "Backend-agnostic SvelteKit plumbing: typed route matching, a reverse proxy, protected-route redirects, and a dev error page.",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/velastack/kit.git"
+	},
+	"homepage": "https://github.com/velastack/kit#readme",
+	"bugs": {
+		"url": "https://github.com/velastack/kit/issues"
+	},
+	"type": "module",
+	"engines": {
+		"node": ">=20"
+	},
+	"scripts": {
+		"build": "rm -rf dist && tsc -p tsconfig.build.json",
+		"check": "tsc --noEmit",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"format": "prettier --write .",
+		"lint": "prettier --check .",
+		"prepack": "npm run build && publint"
+	},
+	"files": [
+		"dist",
+		"!dist/**/*.test.*",
+		"!dist/**/*.spec.*"
+	],
+	"sideEffects": false,
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		}
+	},
+	"peerDependencies": {
+		"@sveltejs/kit": "^2.0.0"
+	},
+	"devDependencies": {
+		"@sveltejs/kit": "^2.57.1",
+		"prettier": "^3.4.2",
+		"publint": "^0.3.2",
+		"typescript": "^5.9.3",
+		"vitest": "^4.1.5"
+	},
+	"keywords": [
+		"sveltekit",
+		"svelte",
+		"velastack"
+	]
+}
