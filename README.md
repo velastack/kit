@@ -50,6 +50,28 @@ protectedRouteRedirect({
 A standalone HTML error page styled for both colour schemes. `message` is
 interpolated as **trusted HTML**, not escaped — never pass user input to it.
 
+## Generated pages
+
+Templates link to pages a `vela` command has yet to create — the footer points
+at `/privacy` and `/terms`, the navbar at `/login`. `LEGAL_PAGES` and
+`AUTH_PAGES` map those paths to the command that creates them, and
+`generatedPageResponse(pathname, pages)` turns one into a 404 that says so (or
+returns `null`, leaving the caller's own 404 alone).
+
+`handleStatic()` is the whole server hook for a project with no backend: in dev
+it answers a 404 on a legal page with the command that generates it, and does
+nothing otherwise. It takes no options — there is no backend to point it at.
+
+```ts
+// src/hooks.server.ts
+import { handleStatic } from '@velastack/kit';
+
+export const handle = handleStatic();
+```
+
+A backend project gets the same behaviour, plus the auth pages, from
+`handlePocketbase`.
+
 ## License
 
 MIT
