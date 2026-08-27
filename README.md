@@ -21,6 +21,18 @@ import type { RouteId } from './$types';
 const res = await context.request.get('/dashboard' satisfies Match<RouteId>);
 ```
 
+Segments SvelteKit lets match zero segments — `[[optional]]` and `[...rest]` —
+widen to a union that includes the variant where the segment is absent, so both
+of these hold for `/[[lang]]/blog`:
+
+```ts
+'/blog' satisfies Match<'/[[lang]]/blog'>;
+'/en/blog' satisfies Match<'/[[lang]]/blog'>;
+```
+
+The widening is deliberately loose — `string` also spans `/`, so a URL with
+extra segments can still satisfy a single `[param]`.
+
 ## `proxy(url, event)`
 
 Forwards the current request to `url` and returns the upstream response. Strips
