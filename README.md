@@ -84,6 +84,39 @@ export const handle = handleStatic();
 A backend project gets the same behaviour, plus the auth pages, from
 `handlePocketbase`.
 
+## `dataDir()` / `dataPath(...)`
+
+```ts
+import { dataPath } from '@velastack/kit/server';
+```
+
+Where the app keeps state that has to outlive a release: its own SQLite
+database, uploaded files, anything it writes and expects to find again.
+
+```ts
+const db = new Database(dataPath('app.sqlite'));
+const uploads = dataPath('uploads');
+```
+
+`vela` sets `VELA_DATA_DIR` everywhere it runs an app — `vela dev`, `vela
+build`, and the environment written on each deploy — so the same call answers
+`<project>/data` in a checkout and `/var/lib/vela/apps/<id>/shared/pb_data` on a
+server. Both are directories that survive a deploy. With nothing in the
+environment it falls back to `data/` under the working directory, which is what
+a bare `vitest` run or a hand-run script wants.
+
+Deriving the path from `process.cwd()` instead is the mistake this replaces: the
+working directory is the project root during development but a _release_
+directory in production, so the database lands somewhere the next deploy leaves
+behind, the pruner later deletes, and no backup ever captured.
+
+On a server with a backend this is PocketBase's own directory, so `vela backup`
+captures whatever the app put there and `vela restore` replaces it.
+
+Imported from `@velastack/kit/server`, not the package root: it reads
+`node:path`, and the root entry point stays free of anything that cannot be
+bundled for a browser.
+
 ## License
 
 MIT

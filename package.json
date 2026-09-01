@@ -1,6 +1,6 @@
 {
 	"name": "@velastack/kit",
-	"version": "0.2.1",
+	"version": "0.3.0",
 	"description": "Backend-agnostic SvelteKit plumbing: typed route matching, a reverse proxy, protected-route redirects, and a dev error page.",
 	"license": "MIT",
 	"repository": {
@@ -35,6 +35,10 @@
 		".": {
 			"types": "./dist/index.d.ts",
 			"default": "./dist/index.js"
+		},
+		"./server": {
+			"types": "./dist/server.d.ts",
+			"default": "./dist/server.js"
 		}
 	},
 	"peerDependencies": {
