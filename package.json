@@ -1,6 +1,6 @@
 {
 	"name": "@velastack/kit",
-	"version": "0.3.0",
+	"version": "0.4.0",
 	"description": "Backend-agnostic SvelteKit plumbing: typed route matching, a reverse proxy, protected-route redirects, and a dev error page.",
 	"license": "MIT",
 	"repository": {
@@ -13,7 +13,7 @@
 	},
 	"type": "module",
 	"engines": {
-		"node": ">=20"
+		"node": ">=22.17"
 	},
 	"scripts": {
 		"build": "rm -rf dist && tsc -p tsconfig.build.json",
@@ -42,10 +42,10 @@
 		}
 	},
 	"peerDependencies": {
-		"@sveltejs/kit": "^2.0.0"
+		"@sveltejs/kit": "^3.0.0"
 	},
 	"devDependencies": {
-		"@sveltejs/kit": "^2.57.1",
+		"@sveltejs/kit": "^3.0.0",
 		"@types/node": "^22.20.1",
 		"prettier": "^3.4.2",
 		"publint": "^0.3.2",

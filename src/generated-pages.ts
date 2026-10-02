@@ -1,4 +1,4 @@
-import type { Handle } from '@sveltejs/kit';
+import type { Handle } from '@sveltejs/kit/hooks';
 import { errorPage } from './error-page.js';
 
 /** Paths a `vela` command creates, mapped to the command that creates them. */

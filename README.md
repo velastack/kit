@@ -8,6 +8,9 @@ database or backend.
 npm install @velastack/kit
 ```
 
+Requires SvelteKit 3 and Node 22.17 or later. SvelteKit 2 projects stay on
+`@velastack/kit@^0.3`.
+
 ## `Match<RouteId>`
 
 Turns a SvelteKit route id into the shape of the URLs that match it — route
@@ -80,6 +83,9 @@ import { handleStatic } from '@velastack/kit';
 
 export const handle = handleStatic();
 ```
+
+The hook is typed as SvelteKit 3's `Handle` from `@sveltejs/kit/hooks`, so it
+composes with `sequence` from the same module.
 
 A backend project gets the same behaviour, plus the auth pages, from
 `handlePocketbase`.
